@@ -48,7 +48,7 @@ function get_path {
 GOTO=$(get_path "$CONTENT" ${@})
 if [[ $? = 0 ]]; then
     GOTO="${GOTO/#\~/$HOME}"
-    echo "$GOTO"
+    echo $(eval "echo $GOTO")
     exit 0
 else
     echo $GOTO
