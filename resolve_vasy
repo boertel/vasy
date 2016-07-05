@@ -1,0 +1,56 @@
+#!/bin/bash
+
+if [[ $# == 0 ]]; then
+    echo "usage: $0 ...args"
+    exit 1
+fi
+
+FROM=~/.vasy
+
+if [[ ! -e $FROM ]]; then
+    touch $FROM
+fi
+
+INDENTATION='    '
+
+CONTENT=$(cat $FROM)
+
+function get_path {
+    CONTENT=$1
+    QUERY=$2
+    $VERBOSE || echo "CONTENT: $CONTENT"
+    $VERBOSE || echo "QUERY: $QUERY"
+    NEXT=''
+    ROOT=0
+    while IFS='' read -r line || [[ -n "$line" ]]; do
+        if [[ "$line" =~ ^$QUERY:$ ]]; then
+            # root
+            ROOT=1
+        elif [[ "$line" =~ ^$QUERY: ]]; then
+            # value
+            echo "$line" | sed -e "s/^$QUERY: //g"
+            exit 0
+        fi
+        if [[ $ROOT = 1 && "$line" =~ ^$INDENTATION ]]; then
+            CHILD=$(echo "$line" | sed -e "s/^$INDENTATION//g")
+            NEXT="$NEXT$CHILD\n"
+        fi
+    done <<< "$CONTENT"
+    if [[ -n "$NEXT" ]]; then
+        NEXT=$(echo -e "$NEXT")
+        get_path "$NEXT" ${@:3}
+    else
+        echo "no path found for $QUERY"
+        exit 2
+    fi
+}
+
+GOTO=$(get_path "$CONTENT" ${@})
+if [[ $? = 0 ]]; then
+    GOTO="${GOTO/#\~/$HOME}"
+    echo "$GOTO"
+    exit 0
+else
+    echo $GOTO
+    exit 1
+fi
