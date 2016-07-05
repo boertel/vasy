@@ -1,8 +1,7 @@
 ## Install
 
 ```
-ln -s $(pwd)/resolve_vasy /usr/local/bin
-./install_function.sh [~/.functions]
+./install.sh [~/.bash_profile]
 ```
 
 this will create ```/usr/local/bin/resolve_vasy``` and a function ```vasy``` to actually execute ```cd```
