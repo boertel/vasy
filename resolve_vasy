@@ -1,15 +1,17 @@
 #!/bin/bash
 
-if [[ $# == 0 ]]; then
-    echo "usage: $0 ...args"
-    exit 1
-fi
-
 FROM=~/.vasy
 
 if [[ ! -e $FROM ]]; then
     touch $FROM
 fi
+
+if [[ $# == 0 ]]; then
+    echo "usage: $0 ...args"
+    cat $FROM
+    exit 1
+fi
+
 
 INDENTATION='    '
 
