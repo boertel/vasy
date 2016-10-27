@@ -1,30 +1,27 @@
 # Vas-y
 
+## Usage
+```
+$ vasy simple
+cd ~/Projects/simple/
+```
+
+
 ## Install
 
 ```
 ./install.sh [~/.bash_profile]
 ```
 
-this will create ```/usr/local/bin/resolve_vasy``` and a function ```vasy``` to actually execute ```cd```.
-
-
 ## .vasy file
+```vasy``` looks into `~/.vasy` file which is formatted with `key: path`.
 
-```resolve_vasy``` looks into ```~/.vasy``` file for `<key>:<value>` pair.
 Example:
 ```
-app-1: ~/project1/app1
-app-2: ~/project2/app2
-simple: ~/simple/
+app-1: ~/Projects/app1
+app-2: ~/Projects/app2
+simple: ~/Projects/simple/
 ```
-
-and you would use ```vasy``` as such:
-```
-$ vasy simple
-cd ~/simple/
-```
-It also supports autocomplete.
 
 
 ## Notes
