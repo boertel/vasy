@@ -7,47 +7,52 @@ if [[ ! -e $FROM ]]; then
 fi
 
 if [[ $# == 0 ]]; then
-    echo "usage: $0 ...args"
+    echo -e "usage: $0 [-k|--keys] <key>\n"
     cat $FROM
     exit 1
 fi
 
 
-INDENTATION='    '
-
-CONTENT=$(cat $FROM)
+function show_keys {
+    sed -e "s/^\(.*\):\(.*\)/\1/g" -- $FROM | tr -s "\n" " "
+}
 
 function get_path {
-    CONTENT=$1
-    QUERY=$2
-    $VERBOSE || echo "CONTENT: $CONTENT"
-    $VERBOSE || echo "QUERY: $QUERY"
-    NEXT=''
-    ROOT=0
-    while IFS='' read -r line || [[ -n "$line" ]]; do
-        if [[ "$line" =~ ^$QUERY:$ ]]; then
-            # root
-            ROOT=1
-        elif [[ "$line" =~ ^$QUERY: ]]; then
-            # value
-            echo "$line" | sed -e "s/^$QUERY: //g"
-            exit 0
-        fi
-        if [[ $ROOT = 1 && "$line" =~ ^$INDENTATION ]]; then
-            CHILD=$(echo "$line" | sed -e "s/^$INDENTATION//g")
-            NEXT="$NEXT$CHILD\n"
-        fi
-    done <<< "$CONTENT"
-    if [[ -n "$NEXT" ]]; then
-        NEXT=$(echo -e "$NEXT")
-        get_path "$NEXT" ${@:3}
-    else
+    KEY=$1
+    VALUE=$(grep "^$QUERY: " -- $FROM | sed -e "s/^$QUERY: //g")
+    if [[ -z "$VALUE" ]]; then
         echo "no path found for $QUERY"
         exit 2
+    else
+        echo $VALUE
+        exit 0
     fi
 }
 
-GOTO=$(get_path "$CONTENT" ${@})
+
+QUERY=''
+KEYS=0
+while [[ $# -gt 0 ]]; do
+    key="$1"
+
+    case $key in
+        -k|--keys)
+            KEYS=1
+            shift
+            ;;
+        *)
+            QUERY=$key
+            ;;
+    esac
+    shift
+done
+
+if [[ $KEYS == 1 ]]; then
+    show_keys
+    exit 0
+fi
+
+GOTO=$(get_path "$QUERY")
 if [[ $? = 0 ]]; then
     GOTO="${GOTO/#\~/$HOME}"
     echo $(eval "echo $GOTO")
