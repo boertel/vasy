@@ -6,12 +6,12 @@
 ./install.sh [~/.bash_profile]
 ```
 
-this will create ```/usr/local/bin/resolve_vasy``` and a function ```vasy``` to actually execute ```cd```
+this will create ```/usr/local/bin/resolve_vasy``` and a function ```vasy``` to actually execute ```cd```.
 
 
 ## .vasy file
 
-```resolve_vasy``` looks into ```~/.vasy``` file for <key>:<value> pair.
+```resolve_vasy``` looks into ```~/.vasy``` file for `<key>:<value>` pair.
 Example:
 ```
 app-1: ~/project1/app1
@@ -24,6 +24,8 @@ and you would use ```vasy``` as such:
 $ vasy simple
 cd ~/simple/
 ```
+It also supports autocomplete.
+
 
 ## Notes
 ```vasy``` comes from *vas-y* French for *go on*
