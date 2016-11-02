@@ -1,5 +1,5 @@
 function vasy {
-    GOTO="$(resolve_vasy $@)"
+    GOTO="$(vasy-resolve $@)"
     if [[ $? == 0 ]]; then
         builtin cd $GOTO
     else
