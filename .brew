@@ -1,0 +1,2 @@
+DESCRIPTION=vas-y, quick cd with aliases
+INSTALL=bin.install "vasy-resolve"
