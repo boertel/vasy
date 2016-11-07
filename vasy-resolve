@@ -32,13 +32,16 @@ function get_path {
 
 QUERY=''
 KEYS=0
+SET=0
 while [[ $# -gt 0 ]]; do
     key="$1"
 
     case $key in
         -k|--keys)
             KEYS=1
-            shift
+            ;;
+        -s|--set)
+            SET=1
             ;;
         *)
             QUERY=$key
@@ -49,6 +52,11 @@ done
 
 if [[ $KEYS == 1 ]]; then
     show_keys
+    exit 0
+fi
+
+if [[ $SET == 1 ]]; then
+    echo "$QUERY: $(pwd)" >> $FROM
     exit 0
 fi
 
