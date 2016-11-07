@@ -52,12 +52,14 @@ done
 
 if [[ $KEYS == 1 ]]; then
     show_keys
-    exit 0
+    exit 1
 fi
 
 if [[ $SET == 1 ]]; then
-    echo "$QUERY: $(pwd)" >> $FROM
-    exit 0
+    CONF="$QUERY: $(pwd)"
+    echo $CONF >> $FROM
+    echo $CONF
+    exit 1
 fi
 
 GOTO=$(get_path "$QUERY")
