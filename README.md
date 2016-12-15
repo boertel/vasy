@@ -6,11 +6,17 @@ $ vasy simple
 cd ~/Projects/simple/
 ```
 
+Set up a alias
+```
+$ vasy -s [key]
+```
+if key is not provided, it will pick up the current folder name
+
 
 ## Install
 
 ```
-./install.sh [~/.bash_profile]
+./install.sh [~/.bash_profile] [destination]
 ```
 
 ## .vasy file

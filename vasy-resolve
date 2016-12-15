@@ -56,6 +56,9 @@ if [[ $KEYS == 1 ]]; then
 fi
 
 if [[ $SET == 1 ]]; then
+    if [[ -z "$QUERY" ]]; then
+        QUERY=$(basename $(pwd))
+    fi
     CONF="$QUERY: $(pwd)"
     echo $CONF >> $FROM
     echo $CONF
