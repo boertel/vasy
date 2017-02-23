@@ -7,8 +7,8 @@ if [[ -z "$PROFILE" ]]; then
 fi
 
 SRC=$(pwd)
-grep "vasy-function.sh" -- $PROFILE || echo "source $SRC/vasy-function.sh" >> $PROFILE
-grep "vasy-completion.sh" -- $PROFILE || echo "source $SRC/vasy-completion.sh" >> $PROFILE
+grep "vasy-function.sh" -- $PROFILE || echo "[[ -s \"$SRC/vasy-function.sh\" ]] && source $SRC/vasy-function.sh" >> $PROFILE
+grep "vasy-completion.sh" -- $PROFILE || echo "[[ -s \"$SRC/vasy-completion.sh\" ]] && source $SRC/vasy-completion.sh" >> $PROFILE
 
 
 DEST=$2
