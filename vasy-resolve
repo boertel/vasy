@@ -7,7 +7,7 @@ if [[ ! -e $FROM ]]; then
 fi
 
 if [[ $# == 0 ]]; then
-    echo -e "usage: $0 [-k|--keys] <key>\n"
+    echo -e "usage: $0 [-k|--keys] [-s|--set] [-g|--get] <key>\n"
     cat $FROM | sort
     exit 1
 fi
@@ -43,6 +43,9 @@ while [[ $# -gt 0 ]]; do
         -s|--set)
             SET=1
             ;;
+        -g|--get)
+            GET=1
+            ;;
         *)
             QUERY=$key
             ;;
@@ -65,7 +68,16 @@ if [[ $SET == 1 ]]; then
     exit 1
 fi
 
+
 GOTO=$(get_path "$QUERY")
+
+if [[ $GET == 1 ]]; then
+    GOTO="${GOTO/#\~/$HOME}"
+    echo $(eval "echo $GOTO")
+    exit 1
+fi
+
+
 if [[ $? = 0 ]]; then
     GOTO="${GOTO/#\~/$HOME}"
     echo $(eval "echo $GOTO")
