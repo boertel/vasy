@@ -1,3 +1,6 @@
+#!/bin/bash
+
+
 _vasy()
 {
     local cur prev opts
