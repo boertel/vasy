@@ -7,14 +7,13 @@ if [[ ! -e $FROM ]]; then
 fi
 
 if [[ $# == 0 ]]; then
-    echo -e "usage: $0 [-k|--keys] [-s|--set] [-g|--get] <key>\n"
     cat $FROM | sort
     exit 1
 fi
 
 
 function show_keys {
-    sed -e "s/^\(.*\):\(.*\)/\1/g" -- $FROM | tr -s "\n" " "
+    awk -v q="$1" -F ":" '{ if (tolower($1) ~ q) print $1 }' $FROM
 }
 
 function get_path {
@@ -54,7 +53,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ $KEYS == 1 ]]; then
-    show_keys
+    show_keys "$QUERY"
     exit 1
 fi
 
