@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function _vasy {
+function vasy_function {
     if [[ $# == 0 ]]; then
         echo -e "usage: vasy [-k|--keys] [-s|--set] [-g|--get] <key>\n"
     fi
@@ -15,9 +15,4 @@ function _vasy {
     fi
 }
 
-alias vasy='_vasy 2>&1'
-
-#_vasy_zsh_tab_completion() {
-#    reply=(${(f)"$(_vasy --keys "$1")"})
-#}
-#compctl -U -K _vasy_zsh_tab_completion _vasy
+alias vasy='vasy_function 2>&1'
