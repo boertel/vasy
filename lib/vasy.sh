@@ -1,10 +1,10 @@
 #!/bin/bash
 
-function vasy_function {
+function function_vasy {
     if [[ $# == 0 ]]; then
         echo -e "usage: vasy [-k|--keys] [-s|--set] [-g|--get] <key>\n"
     fi
-    GOTO=$(vasy-resolve "$@")
+    GOTO=$(resolve_vasy "$@")
     if [[ $? == 0 ]]; then
         builtin cd "$GOTO"
         if [[ -s "./.vasy" ]]; then
@@ -15,4 +15,4 @@ function vasy_function {
     fi
 }
 
-alias vasy='vasy_function 2>&1'
+alias vasy='function_vasy 2>&1'
