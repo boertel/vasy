@@ -1,16 +1,15 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
+set -e
 
-PROFILE=$1
-if [[ -z "$PROFILE" ]]; then
-    PROFILE=~/.bash_profile
+cd "$(dirname "${BASH_SOURCE[0]}")"
+vasy_base=$(pwd)
+
+function="$vasy_base/bin/vasy-function"
+
+profile=${ZDOTDIR:-~}/.zshrc
+already=$(grep -nF "$function" -- $profile | sed 's/:.*//' | tr '\n' ' ')
+
+if [[ -z "$already" ]]; then
+    echo "[ -f $function ] && source $function" >> $profile
 fi
-
-SRC=$(pwd)
-grep "vasy-function" -- $PROFILE || echo "[[ -s \"$SRC/vasy-function\" ]] && source $SRC/vasy-function" >> $PROFILE
-#grep "vasy-completion.sh" -- $PROFILE || echo "[[ -s \"$SRC/vasy-completion.sh\" ]] && source $SRC/vasy-completion.sh" >> $PROFILE
-
-
-DEST=${2:-"/usr/local/bin"}
-cp ./vasy-resolve "$DEST"
-chmod +x "$DEST"/vasy-resolve
