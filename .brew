@@ -1,3 +1,3 @@
 DESCRIPTION=vas-y, quick cd with aliases
-INSTALL=bin.install Dir["bin/*"]\nlib.install Dir["lib/*"]\nzsh_completion.install "vasy-completion.zsh" => "_vasy"
+INSTALL=bin.install Dir["bin/*"]\nlib.install Dir["lib/*"]\nzsh_completion.install "completions/vasy.zsh" => "_vasy"
 CAVEATS=[ -f "#{opt_prefix}/lib/vasy.sh" ] && source "#{opt_prefix}/lib/vasy.sh" ]
