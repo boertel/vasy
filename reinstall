@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-NAME=$(basename $(pwd))
+NAME="$(basename $(pwd))"
 UPGRADE="patch"
 
-git release $UPGRADE && brew uninstall $NAME && sleep 30 && brew update && brew install -v boertel/tap/$NAME
+git release $UPGRADE && brew uninstall "$NAME" && echo "Waiting 30s..." && sleep 30 && brew update && brew install -v "boertel/tap/$NAME"
