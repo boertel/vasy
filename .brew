@@ -1,2 +1,2 @@
 DESCRIPTION=vas-y, quick cd with aliases
-INSTALL=bin.install_symlink Dir["#{libexec}/bin/*"]\nzsh_completion.install libexec/"vasy-autocompletion.zsh"
+INSTALL=bin.install_symlink Dir["#{libexec}/bin/*"]
