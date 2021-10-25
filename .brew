@@ -1,2 +1,2 @@
 DESCRIPTION=vas-y, quick cd with aliases
-INSTALL=bin.install Dir["bin/*"]\nsystem "./install.sh", "${bin}"
+INSTALL=bin.install Dir["bin/*"]\nsystem "./install.sh", "#{bin}"
