@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-cd "$(dirname "${BASH_SOURCE[0]}")"
-vasy_base=$(pwd)
+vasy_base="$1"
+echo "vasy_base=$vasy_base"
 
-function="$vasy_base/bin/vasy-function"
+function="$vasy_base/vasy-function"
 echo "function: $function"
 
 profile=${ZDOTDIR:-~}/.zshrc
