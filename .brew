@@ -1,2 +1,2 @@
 DESCRIPTION=vas-y, quick cd with aliases
-INSTALL=bin.install Dir["bin/*"]
+INSTALL=prefix.install Dir["bin/*"]
