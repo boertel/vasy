@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source "./vasy-completion.zsh"
-
 function _vasy {
     if [[ $# == 0 ]]; then
         echo -e "usage: $0 [-k|--keys] [-s|--set] [-g|--get] <key>\n"
