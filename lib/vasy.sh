@@ -2,7 +2,7 @@
 
 function _vasy {
     if [[ $# == 0 ]]; then
-        echo -e "usage: $0 [-k|--keys] [-s|--set] [-g|--get] <key>\n"
+        echo -e "usage: vasy [-k|--keys] [-s|--set] [-g|--get] <key>\n"
     fi
     GOTO=$(vasy-resolve "$@")
     if [[ $? == 0 ]]; then
