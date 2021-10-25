@@ -1,2 +1,3 @@
 DESCRIPTION=vas-y, quick cd with aliases
 INSTALL=bin.install Dir["bin/*"]\nsystem "./install.sh", "#{bin}"
+CAVEATS=[ -f "#{opt_prefix}/vasy.sh" ] && source "${opt_prefix}/vasy.sh" ]
