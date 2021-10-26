@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 NAME="$(basename $(pwd))"
-UPGRADE="patch"
+UPGRADE="$1"
+if [[ -z "$UPGRADE" ]]; then
+    UPGRADE="patch"
+fi
 
 git release $UPGRADE && brew uninstall "$NAME" && echo "Waiting 30s..." && sleep 30 && brew update && brew install -v "boertel/tap/$NAME"
